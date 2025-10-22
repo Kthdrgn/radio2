@@ -1737,6 +1737,11 @@
             stationDisplayGenres.textContent = station.genres || 'No genres';
             
             playBtn.disabled = false;
+
+            // Stop current stream if playing before starting new one
+            if (player) {
+                player.stop();
+            }
             
             // Close modals
             stationModal.classList.remove('active');
@@ -1747,11 +1752,14 @@
             if (currentPlaylist) {
                 renderPlaylistStations();
             }
-            
+
+
             // Automatically start playing the station
             setTimeout(() => {
                 playBtn.click();
             }, 100);
+
+
         }
         
         // Open playlist
